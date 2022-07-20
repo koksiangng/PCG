@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class MeshGenerator : MonoBehaviour
 {
+
+
+
+
     Mesh mesh;
 
     Vector3[] vertices;
@@ -11,6 +16,10 @@ public class MeshGenerator : MonoBehaviour
 
     //Mandatory parameters
     // Width, height, shape, room count, floor count.
+    public int width;
+    public int height;
+
+
     void Start()
     {
         mesh = new Mesh();
@@ -33,7 +42,7 @@ public class MeshGenerator : MonoBehaviour
 
         triangles = new int[]
         {
-            0, 1, 2
+            0, 1, 2, 2, 1, 0
         };
     }
 
@@ -43,5 +52,30 @@ public class MeshGenerator : MonoBehaviour
 
         mesh.vertices = vertices;
         mesh.triangles = triangles;
+    }
+
+    [CustomEditor(typeof(MeshGenerator))]
+    public class CustomInspector : Editor
+    {
+
+
+        public override void OnInspectorGUI()
+        {
+
+            DrawDefaultInspector();
+
+            if (GUILayout.Button("T-Shape"))
+            {
+                //Do T-Shape generation
+            }
+            if (GUILayout.Button("Rectangle-Shape"))
+            {
+                //Do Rectangle shape generation
+            }
+            if (GUILayout.Button("L-Shape"))
+            {
+                //Do L-Shape generation
+            }
+        }
     }
 }
